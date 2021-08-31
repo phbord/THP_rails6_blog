@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+
+  <div class="headers d-flex align-items-center">
+    <h1 class="me-5">Articles</h1>
+    <h2 id="counter" class="me-5"></h2>
+    <%=link_to 'Count articles', '', class: 'btn btn-success', id: 'count-btn' %>
+  </div>
+
+    <% @articles.each do |article| %>
+      <div class="card my-3 p-4">
+        <h2 class="card-title"><%= article.title %></h2>
+        <p class="card-body"><%= article.content %></p>
+        <div class="buttons">
+          <%= link_to "Show", article, class: "btn btn-primary" %>
+          <%if article.user == current_user%>
+          <%= link_to "Edit", edit_article_path(article), class: "btn btn-warning" %>
+          <%= link_to "Destroy", article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+          <%end%>
+        </div>
+      </div>
+    <% end %>
+
+  <br>
+
+  <%= link_to 'New Article', new_article_path, class: "btn btn-primary mb-5" %>
+
+</div>
